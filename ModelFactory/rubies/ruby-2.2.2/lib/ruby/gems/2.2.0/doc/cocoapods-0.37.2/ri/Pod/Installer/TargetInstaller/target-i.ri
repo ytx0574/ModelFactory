@@ -1,0 +1,2 @@
+U:RDoc::Attr[iI"target:ETI"+Pod::Installer::TargetInstaller#target;FI"R;T:publico:RDoc::Markup::Document:@parts[o:RDoc::Markup::Paragraph;	[I"E@return [Target] The library whose target needs to be generated.;T:
+@fileI"0lib/cocoapods/installer/target_installer.rb;T:0@omit_headings_from_table_of_contents_below0F@I"$Pod::Installer::TargetInstaller;FcRDoc::NormalClass0

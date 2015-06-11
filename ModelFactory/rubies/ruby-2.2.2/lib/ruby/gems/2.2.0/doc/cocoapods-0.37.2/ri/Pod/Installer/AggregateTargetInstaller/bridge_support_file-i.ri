@@ -1,0 +1,4 @@
+U:RDoc::Attr[iI"bridge_support_file:ETI"APod::Installer::AggregateTargetInstaller#bridge_support_file;FI"R;T:privateo:RDoc::Markup::Document:@parts[o:RDoc::Markup::Paragraph;	[I"K@return [Pathname] the path of the bridge support file relative to the;To:RDoc::Markup::Verbatim;	[I"sandbox.
+;T:@format0o;
+;	[I";@return [Nil] if no bridge support file was generated.;T:
+@fileI"Klib/cocoapods/installer/target_installer/aggregate_target_installer.rb;T:0@omit_headings_from_table_of_contents_below0F@I"-Pod::Installer::AggregateTargetInstaller;FcRDoc::NormalClass0

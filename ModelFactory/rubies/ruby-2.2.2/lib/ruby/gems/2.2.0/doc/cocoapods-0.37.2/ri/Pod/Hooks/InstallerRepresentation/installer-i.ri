@@ -1,0 +1,2 @@
+U:RDoc::Attr[iI"installer:ETI"2Pod::Hooks::InstallerRepresentation#installer;FI"R;T:publico:RDoc::Markup::Document:@parts[o:RDoc::Markup::Paragraph;	[I"B@return [Installer] The installer described by this instance.;T:
+@fileI"4lib/cocoapods/hooks/installer_representation.rb;T:0@omit_headings_from_table_of_contents_below0F@I"(Pod::Hooks::InstallerRepresentation;FcRDoc::NormalClass0

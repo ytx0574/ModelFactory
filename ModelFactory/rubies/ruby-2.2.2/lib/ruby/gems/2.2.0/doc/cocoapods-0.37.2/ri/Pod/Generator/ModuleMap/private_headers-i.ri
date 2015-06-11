@@ -1,0 +1,2 @@
+U:RDoc::Attr[iI"private_headers:ETI".Pod::Generator::ModuleMap#private_headers;FI"RW;T:publico:RDoc::Markup::Document:@parts[o:RDoc::Markup::Paragraph;	[I"=@return [Array<#to_s>] the private headers of the module;T:
+@fileI"*lib/cocoapods/generator/module_map.rb;T:0@omit_headings_from_table_of_contents_below0F@I"Pod::Generator::ModuleMap;FcRDoc::NormalClass0

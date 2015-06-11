@@ -12,6 +12,7 @@
 
 #define Library_PATH     [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:[[NSBundle mainBundle] infoDictionary][(NSString *)kCFBundleNameKey]]
 #define DATA_PATH        [Library_PATH stringByAppendingPathComponent:[[NSBundle mainBundle] infoDictionary][(NSString *)kCFBundleNameKey]]
+#define RUBY_ROOT_PATH   [Library_PATH stringByAppendingPathComponent:@"Ruby"]
 
 #define STRING_WITH_SIZE_AND_DEFAULT_HEIGHT(string, font, width) [string boundingRectWithSize:CGSizeMake(width, NSIntegerMax) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:font} context:nil].size
 #define EmptyString     @""
@@ -54,6 +55,7 @@
     [self.matrixRadio selectCellAtRow:0 column:1];
     
     [self readDataFromLocal];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -80,7 +82,11 @@
         return;
     }
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.textFieldLink.stringValue]] queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        self.textViewResponse.string = [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL] description];
+        id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
+        if (!object) {
+            [self showHudForText:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] delay:3.f];
+        }
+        self.textViewResponse.string = object ? [object description] : EmptyString;
     }];
 }
 
@@ -89,6 +95,11 @@
         [self showHudForText:@"生成内容不能为空" delay:1.f];
         return;
     }
+    else if (![[NSFileManager defaultManager] fileExistsAtPath:self.textFieldSavePath.stringValue] || ![self.textFieldSavePath.stringValue hasSuffix:@"xcodeproj"]) {
+        [self showHudForText:@"请填写正确的xcodeproj" delay:1.f];
+        return;
+    }
+    
     [self createModelForDictionary:[self createModelDictionary:self.textViewCreate.string remark:!self.matrixRadio.selectedColumn]
                         forCompany:self.textFieldCompany.stringValue
                      forSuperClass:NSClassFromString(self.textFieldSuperClass.stringValue)
@@ -97,10 +108,35 @@
                   forReferenceType:self.textFieldReferenceType.stringValue
                          forAuthor:self.textFieldAuthor.stringValue
                         forProject:self.textFieldProject.stringValue
-                       forSavePath:self.textFieldSavePath.stringValue];
+                  forXcodeProjName:[self getXcodeprojName:self.textFieldSavePath.stringValue]
+                       forSavePath:[self getSavePathFromProjPath:self.textFieldSavePath.stringValue]];
 }
 
 #pragma mark - Methods
+/**根据传入的xcodeproj可执行文件路径重新给脚本文件命名(xcodeproj_Model)*/
+- (NSString *)getXcodeprojName:(NSString *)xcodeProjPath
+{
+    return [[[[[xcodeProjPath componentsSeparatedByString:@"/"] lastObject] componentsSeparatedByString:@"."] firstObject] stringByAppendingFormat:@"_%@.rb", self.textFieldClassName.stringValue];
+}
+
+/**根据传入的xcodeproj可执行文件路径获取Model的路径*/
+- (NSString *)getSavePathFromProjPath:(NSString *)xcodeProjPath
+{
+    NSRange range = [xcodeProjPath rangeOfString:[[xcodeProjPath componentsSeparatedByString:@"/"] lastObject]];
+    NSString *basePath = [xcodeProjPath substringToIndex:range.location];
+    NSArray *arraySubFoldersAndFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:basePath error:NULL];
+    NSString __block *savePath = nil;
+    [arraySubFoldersAndFiles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        savePath = [basePath stringByAppendingPathComponent:obj];
+        BOOL flag;[[NSFileManager defaultManager] fileExistsAtPath:savePath isDirectory:&flag];
+        if (flag && ![obj hasSuffix:@"Tests"] && [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:savePath error:NULL] containsObject:@"main.m"]) {
+            *stop = YES;
+        }
+    }];
+    return savePath;
+}
+
+/**读取填写数据*/
 - (void)readDataFromLocal
 {
     NSDictionary *dictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:DATA_PATH];
@@ -116,6 +152,7 @@
     }
 }
 
+/**保持填写数据*/
 - (void)saveCurrentData
 {
     NSDictionary *dictionary = @{
@@ -134,6 +171,7 @@
     [NSKeyedArchiver archiveRootObject:dictionary toFile:[Library_PATH stringByAppendingPathComponent:[[NSBundle mainBundle] infoDictionary][(NSString *)kCFBundleNameKey]]];
 }
 
+/**制作创建Model的字典*/
 - (NSDictionary *)createModelDictionary:(NSString *)string remark:(BOOL)remark;
 {
     if (!string || [string isEqualToString:EmptyString]) {
@@ -154,6 +192,7 @@
     return dictionary;
 }
 
+/**创建Model*/
 - (void)createModelForDictionary:(NSDictionary *)info
                forCompany:(NSString *)company
                 forSuperClass:(Class)superClass
@@ -162,6 +201,7 @@
              forReferenceType:(NSString *)referenceType
                     forAuthor:(NSString *)author
                    forProject:(NSString *)project
+             forXcodeProjName:(NSString *)xcodeProjName
                   forSavePath:(NSString *)savePath
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -180,26 +220,40 @@
     NSString *header_m = [NSString stringWithFormat:@"//\n//  %@.m\n//  %@\n//\n//  Created by %@ on %@.\n//  Copyright (c) %@. All rights reserved.\n//\n\n", className, project, author, date, company];
     
     NSString *string_m = [NSString stringWithFormat:@"%@#import \"%@.h\"\n\n@implementation %@\n\n@end", header_m, className, className];
-    
+
     NSString *path = [savePath stringByAppendingPathComponent:className];
     if ([[NSFileManager defaultManager] fileExistsAtPath:[path stringByAppendingPathExtension:@"h"]]) {
         NSAlert *alert = [[NSAlert alloc] init];
         alert.messageText = @"提示";
         alert.informativeText = @"该模型已存在,是否覆盖?";
+        alert.alertStyle = NSCriticalAlertStyle;
         [alert addButtonWithTitle:@"确定"];
         [alert addButtonWithTitle:@"取消"];
         [alert beginSheetModalForWindow:(id)self.nextResponder completionHandler:^(NSModalResponse returnCode) {
             if (returnCode == 1000) {
-                [string_h writeToFile:[path stringByAppendingPathExtension:@"h"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
-                [string_m writeToFile:[path stringByAppendingPathExtension:@"m"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+                [self createModelFileAndExecuteScript:string_h string_m:string_m className:className xcodeProjName:xcodeProjName savePath:savePath];
                 [self saveCurrentData];
             }
         }];
     }else {
-        [string_h writeToFile:[path stringByAppendingPathExtension:@"h"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
-        [string_m writeToFile:[path stringByAppendingPathExtension:@"m"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        [self createModelFileAndExecuteScript:string_h string_m:string_m className:className xcodeProjName:xcodeProjName savePath:savePath];
         [self saveCurrentData];
     }
+}
+
+/**创建Model文件至目标项目,并执行脚本添加项目引用,并删除脚本文件*/
+- (void)createModelFileAndExecuteScript:(NSString *)string_h string_m:(NSString *)string_m className:(NSString *)className xcodeProjName:(NSString *)xcodeProjName savePath:(NSString *)savePath
+{
+    NSString *path = [savePath stringByAppendingPathComponent:className];
+    [string_h writeToFile:[path stringByAppendingPathExtension:@"h"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    [string_m writeToFile:[path stringByAppendingPathExtension:@"m"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    
+    NSString *rubyScriptPath = [[NSBundle mainBundle] pathForResource:@"CustomRubyScript.rb" ofType:nil];
+    NSString *copyScriptPath = [savePath stringByAppendingPathComponent:xcodeProjName];
+    
+    [[NSFileManager defaultManager] copyItemAtPath:rubyScriptPath toPath:copyScriptPath error:NULL];
+    system([[[[NSBundle mainBundle] pathForResource:@"ruby" ofType:nil] stringByAppendingFormat:@" %@", copyScriptPath] UTF8String]);
+//    [[NSFileManager defaultManager] removeItemAtPath:copyScriptPath error:NULL];
 }
 
 - (void)hideHud
@@ -209,18 +263,20 @@
 
 - (void)showHudForText:(NSString *)text delay:(NSTimeInterval)delay;
 {
-    self.textFieldHud.stringValue = text;
-    [self.textFieldHud setHidden:NO];
-    
-    CGRect frame = [self.textFieldHud.stringValue boundingRectWithSize:CGSizeMake(self.view.bounds.size.width, NSIntegerMax) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: self.textFieldHud.font}];
-    frame.origin.x = (self.view.bounds.size.width - frame.size.width) / 2;
-    frame.origin.y = (self.view.bounds.size.height - frame.size.height) / 2;
-    frame.size.width = frame.size.width + 5;
-    self.textFieldHud.frame = frame;
-    
-    [self.timer invalidate];
-    self.timer = nil;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(hideHud) userInfo:nil repeats:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.textFieldHud.stringValue = text;
+        [self.textFieldHud setHidden:NO];
+        
+        CGRect frame = [self.textFieldHud.stringValue boundingRectWithSize:CGSizeMake(self.view.bounds.size.width, NSIntegerMax) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: self.textFieldHud.font}];
+        frame.origin.x = (self.view.bounds.size.width - frame.size.width) / 2;
+        frame.origin.y = (self.view.bounds.size.height - frame.size.height) / 2;
+        frame.size.width = frame.size.width + 5;
+        self.textFieldHud.frame = frame;
+        
+        [self.timer invalidate];
+        self.timer = nil;
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(hideHud) userInfo:nil repeats:NO];
+    });
 }
 
 #pragma mark - GetMethods
@@ -238,4 +294,5 @@
     }
     return _textFieldHud;
 }
+
 @end

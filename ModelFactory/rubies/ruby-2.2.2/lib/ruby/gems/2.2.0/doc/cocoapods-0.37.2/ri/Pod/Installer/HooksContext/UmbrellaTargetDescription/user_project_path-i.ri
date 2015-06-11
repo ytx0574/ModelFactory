@@ -1,0 +1,2 @@
+U:RDoc::Attr[iI"user_project_path:ETI"NPod::Installer::HooksContext::UmbrellaTargetDescription#user_project_path;FI"RW;T:publico:RDoc::Markup::Document:@parts[o:RDoc::Markup::Paragraph;	[I"2@return [String] The path of the user project;To:RDoc::Markup::Verbatim;	[I"integrated by this target.;T:@format0:
+@fileI"-lib/cocoapods/installer/hooks_context.rb;T:0@omit_headings_from_table_of_contents_below0F@I"<Pod::Installer::HooksContext::UmbrellaTargetDescription;FcRDoc::NormalClass0

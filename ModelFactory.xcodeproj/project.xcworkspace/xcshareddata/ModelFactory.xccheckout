@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>98C34ABB-1C93-4C69-AE91-46730E9223FE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ModelFactory</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1F560FF8FD3D8C4AF832B2A8D6754A5855F7F850</key>
+		<string>https://github.com/ytx0574/ModelFactory.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ModelFactory.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1F560FF8FD3D8C4AF832B2A8D6754A5855F7F850</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ytx0574/ModelFactory.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1F560FF8FD3D8C4AF832B2A8D6754A5855F7F850</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1F560FF8FD3D8C4AF832B2A8D6754A5855F7F850</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ModelFactory</string>
+		</dict>
+	</array>
+</dict>
+</plist>

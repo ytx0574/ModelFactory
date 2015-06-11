@@ -645,7 +645,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-227.5" y="-48"/>
+            <point key="canvasLocation" x="-708.5" y="-111"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -665,7 +665,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-221" y="186"/>
+            <point key="canvasLocation" x="-830" y="115"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -683,7 +683,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="3vh-tn-AV2">
-                                            <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="223" height="163"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -722,7 +722,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Jlw-0W-8fW">
-                                            <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="223" height="163"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="307" height="163"/>
@@ -764,7 +764,7 @@
                             <textField verticalHuggingPriority="750" id="jNc-Zn-XbA">
                                 <rect key="frame" x="91" y="208" width="324" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="成都依丝博培训中心" drawsBackground="YES" id="58d-9h-9iy">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="成都依丝博培训中心" placeholderString="模型文件中的公司名称" drawsBackground="YES" id="58d-9h-9iy">
                                     <font key="font" size="11" name="STHeitiSC-Light"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -782,7 +782,7 @@
                             <textField verticalHuggingPriority="750" id="gQO-xm-E5o">
                                 <rect key="frame" x="496" y="208" width="324" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="NSObject" drawsBackground="YES" id="P2e-It-PGA">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="NSObject" placeholderString="父类名称,例如:NSObject" drawsBackground="YES" id="P2e-It-PGA">
                                     <font key="font" size="11" name="STHeitiSC-Light"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -800,7 +800,7 @@
                             <textField verticalHuggingPriority="750" id="gjC-Yr-VW7">
                                 <rect key="frame" x="91" y="180" width="324" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="Johnson" drawsBackground="YES" id="Q63-JY-dzX">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="Johnson" placeholderString="模型文件中的作者名字" drawsBackground="YES" id="Q63-JY-dzX">
                                     <font key="font" size="11" name="STHeitiSC-Light"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -818,7 +818,7 @@
                             <textField verticalHuggingPriority="750" id="KGi-JW-QxL">
                                 <rect key="frame" x="496" y="180" width="324" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="Model" drawsBackground="YES" id="Zjf-LB-r2W">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="Model" placeholderString="模型名称(类名)" drawsBackground="YES" id="Zjf-LB-r2W">
                                     <font key="font" size="11" name="STHeitiSC-Light"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -836,7 +836,7 @@
                             <textField verticalHuggingPriority="750" id="MQG-bJ-wUB">
                                 <rect key="frame" x="91" y="152" width="324" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="ModelFactory" drawsBackground="YES" id="NxY-Xo-gV7">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="ModelFactory" placeholderString="项目的名称,理论上跟.xcodeproj文件的前缀一样" drawsBackground="YES" id="NxY-Xo-gV7">
                                     <font key="font" size="11" name="STHeitiSC-Light"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -854,7 +854,7 @@
                             <textField verticalHuggingPriority="750" id="dfN-Ci-2ZC">
                                 <rect key="frame" x="496" y="152" width="324" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="#import &lt;Foundation/Foundation.h&gt;" drawsBackground="YES" id="EjJ-Lr-Foh">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="#import &lt;Foundation/Foundation.h&gt;" placeholderString="导入头,例如:#import &lt;Foundation/Foundation.h&gt;" drawsBackground="YES" id="EjJ-Lr-Foh">
                                     <font key="font" size="11" name="STHeitiSC-Light"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -863,7 +863,7 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="sZw-wA-YGi">
                                 <rect key="frame" x="25" y="124" width="60" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="存放目录:" id="KqZ-Be-2BP">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="工程路径:" id="KqZ-Be-2BP">
                                     <font key="font" size="13" name="STHeitiSC-Light"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -872,7 +872,7 @@
                             <textField verticalHuggingPriority="750" id="gnN-QD-AjD">
                                 <rect key="frame" x="91" y="124" width="324" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="PnO-Pc-Aqr">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="可执行文件路径,例如:/Users/Johnson/iOS.xcodeproj" drawsBackground="YES" id="PnO-Pc-Aqr">
                                     <font key="font" size="11" name="STHeitiSC-Light"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -890,7 +890,7 @@
                             <textField verticalHuggingPriority="750" id="Xc4-mk-tg4">
                                 <rect key="frame" x="496" y="124" width="324" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="copy" drawsBackground="YES" id="5UF-ss-JgK">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="copy" placeholderString="字符串引用类型,例如:copy, retain, strong" drawsBackground="YES" id="5UF-ss-JgK">
                                     <font key="font" size="11" name="STHeitiSC-Light"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -930,9 +930,9 @@
                             <textField verticalHuggingPriority="750" id="PP6-MF-GgH">
                                 <rect key="frame" x="91" y="96" width="729" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="YS5-s5-DgU">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="GET请求的完整链接,得到的内容会显示在上面" drawsBackground="YES" id="YS5-s5-DgU">
                                     <font key="font" size="11" name="STHeitiSC-Light"/>
-                                    <mutableString key="title">http://interface.ubing.com.cn/GetDictExpandByType.do?deviceID=8C4D5CD6-4C84-49C5-9EF1-3F600E054F7F&amp;interfaceVersion=&amp;mapType=&amp;mapVersion=&amp;screen=640%20%2A%201136&amp;source=&amp;time=1433238340&amp;token=ba4f1e82bd8e33ad70dcd47b82f02643&amp;type=TOURISM_THEME&amp;uid=&amp;uos=IPHONE&amp;userAgent=iPhone%20Simulator&amp;version=1.0.1</mutableString>
+                                    <string key="title">http://interface.ubing.com.cn/GetDictExpandByType.do?deviceID=8C4D5CD6-4C84-49C5-9EF1-3F600E054F7F&amp;interfaceVersion=&amp;mapType=&amp;mapVersion=&amp;screen=640%20%2A%201136&amp;source=&amp;time=1433238340&amp;token=ba4f1e82bd8e33ad70dcd47b82f02643&amp;type=TOURISM_THEME&amp;uid=&amp;uos=IPHONE&amp;userAgent=iPhone%20Simulator&amp;version=1.0.1</string>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -940,7 +940,7 @@
                             <textField verticalHuggingPriority="750" id="4hJ-v3-V8X">
                                 <rect key="frame" x="499" y="383" width="309" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" alignment="left" placeholderString="此处可以是JSON文本内容或者字典文本内容" id="sQa-xh-gCf">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" alignment="left" placeholderString="此处可以是JSON文本内容或者字典(description)内容" id="sQa-xh-gCf">
                                     <font key="font" size="11" name="STHeitiSC-Light"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -988,6 +988,15 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="iTa-p7-qCj">
+                                <rect key="frame" x="251" y="63" width="548" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="charWrapping" enabled="NO" sendsActionOnEndEditing="YES" title="Tips: Model文件将自动添加到工程目录中,可直接在工程左边导航栏中的Models目录中查看" id="MmI-NY-JOY">
+                                    <font key="font" size="13" name="STHeitiSC-Light"/>
+                                    <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
@@ -1009,7 +1018,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-612.5" y="565"/>
+            <point key="canvasLocation" x="-861" y="604"/>
         </scene>
     </scenes>
 </document>

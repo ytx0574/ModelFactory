@@ -1,0 +1,2 @@
+U:RDoc::Attr[iI"target:ETI"7Pod::Generator::XCConfig::AggregateXCConfig#target;FI"R;T:publico:RDoc::Markup::Document:@parts[o:RDoc::Markup::Paragraph;	[I">@return [Target] the target represented by this xcconfig.;T:
+@fileI";lib/cocoapods/generator/xcconfig/aggregate_xcconfig.rb;T:0@omit_headings_from_table_of_contents_below0F@I"0Pod::Generator::XCConfig::AggregateXCConfig;FcRDoc::NormalClass0

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if
+  [[ -s "/Users/johnson/.rvm/rubies/ruby-2.2.2/lib/ruby/gems/2.2.0/environment" ]]
+then
+  source "/Users/johnson/.rvm/rubies/ruby-2.2.2/lib/ruby/gems/2.2.0/environment"
+  exec testrb "$@"
+else
+  echo "ERROR: Missing RVM environment file: '/Users/johnson/.rvm/rubies/ruby-2.2.2/lib/ruby/gems/2.2.0/environment'" >&2
+  exit 1
+fi
