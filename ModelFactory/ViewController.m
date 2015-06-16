@@ -7,15 +7,19 @@
 //
 
 #import "ViewController.h"
+#import "SSZipArchive.h"
 
 #define SAVE_PATH       [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]
 
 #define Library_PATH     [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:[[NSBundle mainBundle] infoDictionary][(NSString *)kCFBundleNameKey]]
+
 #define DATA_PATH        [Library_PATH stringByAppendingPathComponent:[[NSBundle mainBundle] infoDictionary][(NSString *)kCFBundleNameKey]]
-#define RUBY_ROOT_PATH   [Library_PATH stringByAppendingPathComponent:@"Ruby"]
+#define GEMS_PATH        [Library_PATH stringByAppendingPathComponent:@"gems"]
 
 #define STRING_WITH_SIZE_AND_DEFAULT_HEIGHT(string, font, width) [string boundingRectWithSize:CGSizeMake(width, NSIntegerMax) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:font} context:nil].size
+
 #define EmptyString     @""
+#define FieldSeparator  @"Johnson"
 
 @interface ViewController ()
 
@@ -45,6 +49,15 @@
 @end
 
 @implementation ViewController
+
++ (void)load
+{
+    [super load];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:GEMS_PATH]) {
+        [SSZipArchive unzipFileAtPath:[[NSBundle mainBundle] pathForResource:@"gems" ofType:@"zip"] toDestination:Library_PATH];
+    }
+    NSLog(@"本地gem路径:->  %@",GEMS_PATH);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -187,7 +200,7 @@
     [[string componentsSeparatedByString:isJSON ? @"," : @";"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         obj = [obj stringByReplacingOccurrencesOfString:@"\"" withString:EmptyString];
         NSArray *array = [obj componentsSeparatedByString:isJSON ? @":" : @"="];
-        [array.firstObject isEqualToString:EmptyString] ? nil : [dictionary setObject:remark ? array.lastObject : EmptyString forKey:array.firstObject];
+        [array.firstObject isEqualToString:EmptyString] ? nil : [dictionary setObject:remark ? array.lastObject : EmptyString forKey:[NSString stringWithFormat:@"%@%@%@", @(idx), FieldSeparator, array.firstObject]];
     }];
     return dictionary;
 }
@@ -211,8 +224,10 @@
     NSString *header_h = [NSString stringWithFormat:@"//\n//  %@.h\n//  %@\n//\n//  Created by %@ on %@.\n//  Copyright (c) %@. All rights reserved.\n//\n\n", className, project, author, date, company];
     
     NSMutableString *string_h = [NSMutableString stringWithFormat:@"%@%@\n\n@interface %@ : %@\n", header_h, importHeader, className, NSStringFromClass(superClass)];
-    [[info allKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    
+    [[[info allKeys] sortedArrayUsingSelector:@selector(compare:)] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [info[obj] isEqualToString:EmptyString] ? [string_h appendString:@"\n"] : [string_h appendFormat:@"\n/**%@*/\n", info[obj]];
+        obj = [obj componentsSeparatedByString:FieldSeparator].lastObject;
         [string_h appendFormat:@"@property (nonatomic, %@) NSString *%@;\n", referenceType, obj];
     }];
     [string_h appendString:@"\n@end"];
@@ -252,8 +267,11 @@
     NSString *copyScriptPath = [savePath stringByAppendingPathComponent:xcodeProjName];
     
     [[NSFileManager defaultManager] copyItemAtPath:rubyScriptPath toPath:copyScriptPath error:NULL];
-    system([[[[NSBundle mainBundle] pathForResource:@"ruby" ofType:nil] stringByAppendingFormat:@" %@", copyScriptPath] UTF8String]);
-//    [[NSFileManager defaultManager] removeItemAtPath:copyScriptPath error:NULL];
+//    system([[@"/Users/johnson/.rvm/rubies/ruby-2.2.2/bin/ruby" stringByAppendingFormat:@" %@", copyScriptPath] UTF8String]);
+    system([[@"/usr/bin/ruby" stringByAppendingFormat:@" %@", copyScriptPath] UTF8String]);
+    [[NSFileManager defaultManager] removeItemAtPath:copyScriptPath error:NULL];
+    
+    [self showHudForText:@"请到工程中查看已生成的Model" delay:1.f];
 }
 
 - (void)hideHud

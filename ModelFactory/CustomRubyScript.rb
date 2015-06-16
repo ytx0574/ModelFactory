@@ -1,5 +1,18 @@
-require 'xcodeproj'
+#拼接路径
+#require File::join('/Users', `whoami`.chomp, '/Library/ModelFactory/xcodeproj/xcodeproj.rb')
+#require '/Users/johnson/Desktop/xcodeproj/xcodeproj.rb'
+
+# 设置引用头前半部分
+# $:<< Xcodeproj.basePath + 'gems/xcodeproj-0.24.2/lib'
+
+# 导入头 "导入事先拷贝到用户library下面的xcodeproj"
+basePath = File::join('/Users', `whoami`.chomp, '/Library/ModelFactory/')
+require basePath + 'gems/xcodeproj-0.24.2/lib/xcodeproj'
 require 'pathname'
+
+# 设置Ruby的默认编码
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
 
 # 得到执行脚本文件的路径
 scriptPath = Pathname.new(__FILE__).realpath.to_s
