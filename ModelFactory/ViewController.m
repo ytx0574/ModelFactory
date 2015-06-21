@@ -205,6 +205,20 @@
     return dictionary;
 }
 
+- (NSString *)createProperty:(NSDictionary *)info forReferenceType:(NSString *)referenceType
+{
+    NSMutableString *stringContext = [NSMutableString stringWithString:@"\n"];
+    [[[info allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return ([[obj1 componentsSeparatedByString:FieldSeparator].firstObject integerValue] < [[obj2 componentsSeparatedByString:FieldSeparator].firstObject integerValue]) ? NSOrderedAscending : NSOrderedDescending;
+    }] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [info[obj] isEqualToString:EmptyString] ? [stringContext appendString:@"\n"] : [stringContext appendFormat:@"\n/**%@*/\n", info[obj]];
+        obj = [obj componentsSeparatedByString:FieldSeparator].lastObject;
+        [stringContext appendFormat:@"@property (nonatomic, %@) NSString *%@;\n", referenceType, obj];
+    }];
+    [stringContext appendString:@"\n"];
+    return stringContext ?: EmptyString;
+}
+
 /**创建Model*/
 - (void)createModelForDictionary:(NSDictionary *)info
                forCompany:(NSString *)company
@@ -223,36 +237,50 @@
     
     NSString *header_h = [NSString stringWithFormat:@"//\n//  %@.h\n//  %@\n//\n//  Created by %@ on %@.\n//  Copyright (c) %@. All rights reserved.\n//\n\n", className, project, author, date, company];
     
-    NSMutableString *string_h = [NSMutableString stringWithFormat:@"%@%@\n\n@interface %@ : %@\n", header_h, importHeader, className, NSStringFromClass(superClass)];
+    NSMutableString *string_h = [NSMutableString stringWithFormat:@"%@%@\n\n@interface %@ : %@", header_h, importHeader, className, NSStringFromClass(superClass)];
     
-    [[[info allKeys] sortedArrayUsingSelector:@selector(compare:)] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [info[obj] isEqualToString:EmptyString] ? [string_h appendString:@"\n"] : [string_h appendFormat:@"\n/**%@*/\n", info[obj]];
-        obj = [obj componentsSeparatedByString:FieldSeparator].lastObject;
-        [string_h appendFormat:@"@property (nonatomic, %@) NSString *%@;\n", referenceType, obj];
-    }];
-    [string_h appendString:@"\n@end"];
+    [string_h appendString:[self createProperty:info forReferenceType:referenceType]];
+    
+    [string_h appendString:@"@end"];
     
     NSString *header_m = [NSString stringWithFormat:@"//\n//  %@.m\n//  %@\n//\n//  Created by %@ on %@.\n//  Copyright (c) %@. All rights reserved.\n//\n\n", className, project, author, date, company];
     
     NSString *string_m = [NSString stringWithFormat:@"%@#import \"%@.h\"\n\n@implementation %@\n\n@end", header_m, className, className];
 
-    NSString *path = [savePath stringByAppendingPathComponent:className];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[path stringByAppendingPathExtension:@"h"]]) {
+    NSString *path_h = [[savePath stringByAppendingPathComponent:className] stringByAppendingPathExtension:@"h"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path_h]) {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"提示";
-        alert.informativeText = @"该模型已存在,是否覆盖?";
+        alert.messageText = @"(•̀⌄•́)";
+        alert.informativeText = @"该模型已存在";
         alert.alertStyle = NSCriticalAlertStyle;
-        [alert addButtonWithTitle:@"确定"];
+        [alert addButtonWithTitle:@"覆盖"];
+        [alert addButtonWithTitle:@"追加"];
         [alert addButtonWithTitle:@"取消"];
         [alert beginSheetModalForWindow:(id)self.nextResponder completionHandler:^(NSModalResponse returnCode) {
-            if (returnCode == 1000) {
+            if (returnCode == 1000) {//覆盖
                 [self createModelFileAndExecuteScript:string_h string_m:string_m className:className xcodeProjName:xcodeProjName savePath:savePath];
-                [self saveCurrentData];
+            }else if (returnCode == 1001) {//追加
+                NSMutableString *string_h_old = [[NSMutableString alloc] initWithContentsOfFile:path_h encoding:NSUTF8StringEncoding error:NULL];
+
+                NSMutableArray *array_properties_old = [NSMutableArray array];
+                [[string_h_old componentsSeparatedByString:@";"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    [array_properties_old addObject:[[obj componentsSeparatedByString:@"*"] lastObject]];
+                }];
+                [array_properties_old removeLastObject];
+                
+                NSMutableDictionary *new_info = [NSMutableDictionary dictionaryWithDictionary:info];
+                [new_info enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                    NSString *propertyString = [key componentsSeparatedByString:FieldSeparator].lastObject;
+                    [array_properties_old containsObject:propertyString] ? [new_info removeObjectForKey:key] : nil;
+                }];
+                
+                [string_h_old insertString:[self createProperty:new_info forReferenceType:referenceType] atIndex:[string_h_old rangeOfString:@"@end"].location];
+                
+                [self createModelFileAndExecuteScript:string_h_old string_m:string_m className:className xcodeProjName:xcodeProjName savePath:savePath];
             }
         }];
     }else {
         [self createModelFileAndExecuteScript:string_h string_m:string_m className:className xcodeProjName:xcodeProjName savePath:savePath];
-        [self saveCurrentData];
     }
 }
 
@@ -270,7 +298,8 @@
 //    system([[@"/Users/johnson/.rvm/rubies/ruby-2.2.2/bin/ruby" stringByAppendingFormat:@" %@", copyScriptPath] UTF8String]);
     system([[@"/usr/bin/ruby" stringByAppendingFormat:@" %@", copyScriptPath] UTF8String]);
     [[NSFileManager defaultManager] removeItemAtPath:copyScriptPath error:NULL];
-    
+ 
+    [self saveCurrentData];
     [self showHudForText:@"请到工程中查看已生成的Model" delay:1.f];
 }
 
