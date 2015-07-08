@@ -930,9 +930,8 @@
                             <textField verticalHuggingPriority="750" id="PP6-MF-GgH">
                                 <rect key="frame" x="91" y="96" width="729" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="GET请求的完整链接,得到的内容会显示在上面" drawsBackground="YES" id="YS5-s5-DgU">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&amp;ip=218.4.255.222" placeholderString="GET请求的完整链接,得到的内容会显示在上面" drawsBackground="YES" id="YS5-s5-DgU">
                                     <font key="font" size="11" name="STHeitiSC-Light"/>
-                                    <string key="title">http://interface.ubing.com.cn/GetDictExpandByType.do?deviceID=8C4D5CD6-4C84-49C5-9EF1-3F600E054F7F&amp;interfaceVersion=&amp;mapType=&amp;mapVersion=&amp;screen=640%20%2A%201136&amp;source=&amp;time=1433238340&amp;token=ba4f1e82bd8e33ad70dcd47b82f02643&amp;type=TOURISM_THEME&amp;uid=&amp;uos=IPHONE&amp;userAgent=iPhone%20Simulator&amp;version=1.0.1</string>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>

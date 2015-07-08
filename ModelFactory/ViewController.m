@@ -97,7 +97,7 @@
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.textFieldLink.stringValue]] queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
         if (!object) {
-            [self showHudForText:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] delay:3.f];
+            [self showHudForText:response.description delay:3.f];
         }
         self.textViewResponse.string = object ? [object description] : EmptyString;
     }];
