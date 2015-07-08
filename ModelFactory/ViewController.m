@@ -196,6 +196,8 @@
     //是否是JSON片段
     BOOL isJSON = [[lastChar substringFromIndex:lastChar.length > 0 ? lastChar.length - 1 : 0] isEqualToString:@","];
     string = [string stringByReplacingOccurrencesOfString:@"\n" withString:EmptyString];
+    string = [string stringByReplacingOccurrencesOfString:@"{" withString:EmptyString];
+    string = [string stringByReplacingOccurrencesOfString:@"}" withString:EmptyString];
     
     [[string componentsSeparatedByString:isJSON ? @"," : @";"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         obj = [obj stringByReplacingOccurrencesOfString:@"\"" withString:EmptyString];
