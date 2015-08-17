@@ -86,6 +86,11 @@
     (self.textFieldCreatePlaceholder.hidden = ![self.textViewCreate.string isEqualToString:EmptyString])
     :
     (self.textFieldResponsePlaceholder.hidden = ![self.textViewResponse.string isEqualToString:EmptyString]);
+    
+    if ([noti.object isKindOfClass:[NSTextView class]]) {
+        NSTextView *textView = noti.object;
+        textView.textColor = [NSColor blackColor];
+    }
 }
 
 #pragma mark - Click
@@ -123,6 +128,18 @@
                         forProject:self.textFieldProject.stringValue
                   forXcodeProjName:[self getXcodeprojName:self.textFieldSavePath.stringValue]
                        forSavePath:[self getSavePathFromProjPath:self.textFieldSavePath.stringValue]];
+}
+
+- (IBAction)clickChooseFile:(id)sender {
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    [openPanel setTitle:@"请选择项目可执行文件 .xcodeproj"];
+    [openPanel setCanChooseFiles:YES];
+    [openPanel setCanChooseDirectories:NO];
+    [openPanel setAllowsMultipleSelection:NO];
+    [openPanel setAllowedFileTypes:@[@"xcodeproj"]];
+    if ([openPanel runModal] == NSModalResponseOK) {
+        self.textFieldSavePath.stringValue = [openPanel.URL.absoluteString stringByReplacingOccurrencesOfString:@"file://" withString:EmptyString];
+    }
 }
 
 #pragma mark - Methods
@@ -299,6 +316,7 @@
     [[NSFileManager defaultManager] copyItemAtPath:rubyScriptPath toPath:copyScriptPath error:NULL];
 //    system([[@"/Users/johnson/.rvm/rubies/ruby-2.2.2/bin/ruby" stringByAppendingFormat:@" %@", copyScriptPath] UTF8String]);
     system([[@"/usr/bin/ruby" stringByAppendingFormat:@" %@", copyScriptPath] UTF8String]);
+    system([[NSString stringWithFormat:@"open %@", self.textFieldSavePath.stringValue] UTF8String]);
     [[NSFileManager defaultManager] removeItemAtPath:copyScriptPath error:NULL];
  
     [self saveCurrentData];
