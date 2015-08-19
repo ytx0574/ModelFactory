@@ -14,6 +14,7 @@
 		2C2AF6031B25478B0023CC8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C2AF6011B25478B0023CC8F /* Main.storyboard */; };
 		2C2AF60F1B25478B0023CC8F /* ModelFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2AF60E1B25478B0023CC8F /* ModelFactoryTests.m */; };
 		2C7E35351B2E814500251A3C /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7E35341B2E814500251A3C /* libz.1.1.3.dylib */; };
+		2CBE1DFE1B84648100772D45 /* use.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2CBE1DFD1B84648100772D45 /* use.gif */; };
 		2CD8CA031B2737A70074FBD6 /* CustomRubyScript.rb in Resources */ = {isa = PBXBuildFile; fileRef = 2CD8CA021B2737A70074FBD6 /* CustomRubyScript.rb */; };
 		2CEF57B61B301DCA008C7A84 /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CEF57AB1B301DCA008C7A84 /* crypt.h */; };
 		2CEF57B71B301DCA008C7A84 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF57AC1B301DCA008C7A84 /* ioapi.c */; };
@@ -53,6 +54,7 @@
 		2C2AF60D1B25478B0023CC8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C2AF60E1B25478B0023CC8F /* ModelFactoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelFactoryTests.m; sourceTree = "<group>"; };
 		2C7E35341B2E814500251A3C /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		2CBE1DFD1B84648100772D45 /* use.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = use.gif; sourceTree = "<group>"; };
 		2CD8CA021B2737A70074FBD6 /* CustomRubyScript.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = CustomRubyScript.rb; sourceTree = "<group>"; };
 		2CEF57AB1B301DCA008C7A84 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		2CEF57AC1B301DCA008C7A84 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		2C2AF5E91B25478B0023CC8F = {
 			isa = PBXGroup;
 			children = (
+				2CBE1DFD1B84648100772D45 /* use.gif */,
 				2C7E35361B2E814F00251A3C /* FrameWorks */,
 				2C2AF5F41B25478B0023CC8F /* ModelFactory */,
 				2C2AF60B1B25478B0023CC8F /* ModelFactoryTests */,
@@ -292,6 +295,7 @@
 				2CEF57C31B301E1C008C7A84 /* gems.zip in Resources */,
 				2C2AF6001B25478B0023CC8F /* Images.xcassets in Resources */,
 				2C2AF6031B25478B0023CC8F /* Main.storyboard in Resources */,
+				2CBE1DFE1B84648100772D45 /* use.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
