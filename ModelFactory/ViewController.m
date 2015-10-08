@@ -319,8 +319,8 @@
     
     NSString __block *executableFilePath = self.textFieldSavePath.stringValue;
     [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self.textFieldSavePath.stringValue stringByDeletingLastPathComponent] error:nil] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if ([obj hasSuffix:@"xcworxkspace"]) {
-            executableFilePath = [[self.textFieldSavePath.stringValue stringByDeletingLastPathComponent] stringByAppendingString:obj];
+        if ([obj hasSuffix:@"xcworkspace"]) {
+            executableFilePath = [[self.textFieldSavePath.stringValue stringByDeletingLastPathComponent] stringByAppendingPathComponent:obj];
             *stop = YES;
         }
     }];
