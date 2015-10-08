@@ -316,7 +316,16 @@
     [[NSFileManager defaultManager] copyItemAtPath:rubyScriptPath toPath:copyScriptPath error:NULL];
 //    system([[@"/Users/johnson/.rvm/rubies/ruby-2.2.2/bin/ruby" stringByAppendingFormat:@" %@", copyScriptPath] UTF8String]);
     system([[@"/usr/bin/ruby" stringByAppendingFormat:@" %@", copyScriptPath] UTF8String]);
-    system([[NSString stringWithFormat:@"open %@", self.textFieldSavePath.stringValue] UTF8String]);
+    
+    NSString __block *executableFilePath = self.textFieldSavePath.stringValue;
+    [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self.textFieldSavePath.stringValue stringByDeletingLastPathComponent] error:nil] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([obj hasSuffix:@"xcworxkspace"]) {
+            executableFilePath = [[self.textFieldSavePath.stringValue stringByDeletingLastPathComponent] stringByAppendingString:obj];
+            *stop = YES;
+        }
+    }];
+    
+    system([[NSString stringWithFormat:@"open %@", executableFilePath] UTF8String]);
     [[NSFileManager defaultManager] removeItemAtPath:copyScriptPath error:NULL];
  
     [self saveCurrentData];
